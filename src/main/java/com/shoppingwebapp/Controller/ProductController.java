@@ -3,8 +3,11 @@ package com.shoppingwebapp.Controller;
 import com.shoppingwebapp.Dao.ProductRepository;
 import com.shoppingwebapp.Model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import org.springframework.data.domain.Pageable;
 
 @CrossOrigin
 @RestController
@@ -29,10 +32,16 @@ public class ProductController {
         return "Success!";
     }*/
 
-    @GetMapping(path = "/list")
+    @GetMapping(path = "/showProduct")
     public Iterable<Product> listProduct() {
         return productRepository.findAll();
     }
 
+    @GetMapping(path = "/showProduct/{page}")
+    public Iterable<Product> listProductByPage(@PathVariable("page") int page) {
+        int elementInOnePage = 6;
+        Pageable pageable = PageRequest.of(page, elementInOnePage);
+        return productRepository.findAll(pageable).getContent();
+    }
 
 }

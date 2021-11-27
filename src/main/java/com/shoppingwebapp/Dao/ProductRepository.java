@@ -1,9 +1,8 @@
 package com.shoppingwebapp.Dao;
 
 import com.shoppingwebapp.Model.Product;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface ProductRepository extends CrudRepository<Product, Integer> {
 
+public interface ProductRepository extends PagingAndSortingRepository<Product, Integer> {
 }

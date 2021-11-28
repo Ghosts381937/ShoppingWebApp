@@ -13,13 +13,13 @@ public class MemberAuthentication {
     @Autowired
     private MemberRepository memberRepository;
 
-    @PostMapping(path = "/login") //Create member
+    @PostMapping(path = "/login") //login
     public String login(@RequestParam String username, @RequestParam String password,HttpSession session) {
         Iterable<Member> iterable = memberRepository.findByUsername(username);
 
         for (Member member : iterable) {
             if(member.getPassword().equals(password)){
-                if(session.getAttribute(username) == null){
+                if(session.getAttribute(username) == null){  //if login success and username is not in the session table
                     session.setAttribute(username, member.getId());
                 }
                 return "Success";

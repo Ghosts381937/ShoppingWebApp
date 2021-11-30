@@ -9,5 +9,5 @@ import org.springframework.data.repository.CrudRepository;
 // CRUD refers Create, Read, Update, Delete
 
 public interface MemberRepository extends CrudRepository<Member, Integer> {
-
+    Iterable<Member> findByUsername(String username);
 }

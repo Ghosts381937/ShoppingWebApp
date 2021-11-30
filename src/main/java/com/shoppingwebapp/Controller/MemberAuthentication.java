@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
+@CrossOrigin(allowCredentials = "true", origins = "http://localhost:3000/")//set CORS
 @RestController // This means that this class is a Controller
 @RequestMapping(path = "/auth") // This means URL's start with /demo (after Application path)
 public class MemberAuthentication {
@@ -19,24 +20,25 @@ public class MemberAuthentication {
 
         for (Member member : iterable) {
             if(member.getPassword().equals(password)){
-                if(session.getAttribute(username) == null){  //if login success and username is not in the session table
-                    session.setAttribute(username, member.getId());
+                if(session.getAttribute("userId") == null){  //if login success and username is not in the session table
+                    session.setAttribute("userId", member.getId());
                 }
-                return "Success";
+                return "Success!";
             }
         }
-        return "Fail";
+        return "Fail!";
+    }
+    @PostMapping(path = "/logout") //logout
+    public String logout(HttpSession session) {
+        if(session.getAttribute("userId") != null) {
+            session.removeAttribute("userId");
+            return "Success!";
+        }
+        else {
+            return "Fail!";
+        }
+
     }
 
 
-    @GetMapping("/set")//set a session id for "test" then return to client
-    public String set(HttpSession session) {
-        session.setAttribute("user", "test");
-        return "success";
-    }
-
-    @GetMapping("/get")//use the session id on the client to get the username
-    public String get(HttpSession session) {
-        return "Session id:" + session.getAttribute("user");
-    }
 }

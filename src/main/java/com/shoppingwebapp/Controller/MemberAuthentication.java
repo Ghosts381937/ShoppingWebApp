@@ -37,8 +37,5 @@ public class MemberAuthentication {
         else {
             return "Fail!";
         }
-
     }
-
-
 }

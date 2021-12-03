@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.Optional;
+
 @CrossOrigin
 @Controller // This means that this class is a Controller
 @RequestMapping(path = "/member") // This means URL's start with /demo (after Application path)
@@ -23,5 +26,35 @@ public class MemberController {
         member.setPassword(password);
         memberRepository.save(member);
         return "Success!";
+    }
+
+    @PostMapping(path = "/updateMemberInfo") //return member info
+    @ResponseBody
+    public String updateMemberInfo(@RequestParam String newUsername, @RequestParam String newEmail, @RequestParam String password, @RequestParam String newPassword, HttpSession session) {
+        Object memberID = session.getAttribute("userId");
+        if(memberID != null){
+            Optional<Member> Optional = memberRepository.findById(Integer.parseInt(memberID.toString()));
+            Member member = Optional.get();
+            String currentPassword = member.getPassword();
+            if(currentPassword.equals(password)){
+                member.setUsername(newUsername);
+                member.setEmail(newEmail);
+                member.setPassword(newPassword);
+                memberRepository.save(member);
+                return "Success!";
+            }else return "Fail!";
+        }
+        return "Fail!";
+    }
+
+    @PostMapping(path = "/requestMemberInfo") //update member info
+    @ResponseBody
+    public Member requestMemberInfo(HttpSession session) {
+        Object memberID = session.getAttribute("userId");
+        if(memberID != null){
+            Optional<Member> Optional = memberRepository.findById(Integer.parseInt(memberID.toString()));
+            return Optional.get();
+        }
+        return null;
     }
 }

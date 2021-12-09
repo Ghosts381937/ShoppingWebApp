@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true", origins = "http://localhost:3000/")//set CORS
 @Controller // This means that this class is a Controller
 @RequestMapping(path = "/member") // This means URL's start with /demo (after Application path)
 public class MemberController {

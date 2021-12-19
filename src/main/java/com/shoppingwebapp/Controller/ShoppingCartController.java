@@ -49,7 +49,7 @@ public class ShoppingCartController {
         return "Success!";
     }
 
-    @GetMapping(path = "/showShoppingCart")
+    @PostMapping(path = "/showShoppingCart")
     public List<Item> showShoppingCart(HttpSession session) {
         List<Item> cart = (List<Item>) session.getAttribute("cart");
         return cart;

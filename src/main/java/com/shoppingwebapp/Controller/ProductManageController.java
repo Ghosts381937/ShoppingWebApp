@@ -70,7 +70,7 @@ public class ProductManageController {
     @PostMapping(path = "/add") //add
     public String add(@RequestParam String name, @RequestParam String description, @RequestParam String quantity, @RequestParam String price, @RequestParam("file") MultipartFile image, HttpSession session) {
         Object memberID = session.getAttribute("userId");
-        if(Integer.parseInt(quantity) < 0 || Integer.parseInt(price) < 0){
+        if(Integer.parseInt(quantity) < 0 || Integer.parseInt(price) < 0 || name.equals("") || description.equals("")){
             return "Fail!";
         }
         if(memberID != null){

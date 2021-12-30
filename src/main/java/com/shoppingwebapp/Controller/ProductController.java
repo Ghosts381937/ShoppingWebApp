@@ -44,4 +44,9 @@ public class ProductController {
         return productRepository.findAll(pageable).getContent();
     }
 
+    @GetMapping(path = "/search")
+    public Iterable<Product> listProductByPage(@RequestParam String name) {
+        return productRepository.findByNameContaining(name);
+    }
+
 }

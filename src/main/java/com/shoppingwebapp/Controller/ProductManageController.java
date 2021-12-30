@@ -27,7 +27,7 @@ public class ProductManageController {
         Object memberID = session.getAttribute("userId");
         if(memberID != null){
             Member member = memberRepository.findById(Integer.parseInt(memberID.toString())).get();
-            if(Optional.isPresent() && member.getUsername().equals("admin")) {
+            if(Optional.isPresent() && member.getAdmin()) {
                 Product p = Optional.get();
                 productRepository.delete(p);
                 return "Success!";
@@ -47,7 +47,7 @@ public class ProductManageController {
         }
         if(memberID != null){
             Member member = memberRepository.findById(Integer.parseInt(memberID.toString())).get();
-            if(Optional.isPresent() && member.getUsername().equals("admin")) {
+            if(Optional.isPresent() && member.getAdmin()) {
                 Product p = Optional.get();
                 p.setName(name);
                 p.setDescription(description);
@@ -75,7 +75,7 @@ public class ProductManageController {
         }
         if(memberID != null){
             Member member = memberRepository.findById(Integer.parseInt(memberID.toString())).get();
-            if(member.getUsername().equals("admin")) {
+            if(member.getAdmin()) {
                 Product p = new Product();
                 p.setName(name);
                 p.setDescription(description);

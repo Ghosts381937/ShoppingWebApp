@@ -17,6 +17,8 @@ public class Member {
 
     private String email;
 
+    private Boolean isAdmin;
+
     public Integer getId() {
         return id;
     }
@@ -47,5 +49,13 @@ public class Member {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 }

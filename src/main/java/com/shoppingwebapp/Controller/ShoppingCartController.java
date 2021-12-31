@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(allowCredentials = "true", origins = "http://localhost:3000/")
+@CrossOrigin(allowCredentials = "true", origins = "http://54.65.248.67:3000/")
 @RestController
 @RequestMapping(path = "/shoppingcart")
 public class ShoppingCartController {
@@ -29,7 +29,7 @@ public class ShoppingCartController {
             if (index == -1) {
                 cart.add(new Item(productRepository.findById(id).get(), quantity));
             } else {
-                int newQuantity = cart.get(index).getQuantity() + 1;
+                int newQuantity = cart.get(index).getQuantity() + quantity;
                 cart.get(index).setQuantity(newQuantity);
             }
             session.setAttribute("cart", cart);

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(allowCredentials = "true", origins = "http://54.65.248.67:3000/")
+@CrossOrigin(allowCredentials = "true", origins = "http://54.65.248.67", allowedHeaders = "http://54.65.248.67")
 @RestController
 @RequestMapping(path = "/shoppingcart")
 public class ShoppingCartController {

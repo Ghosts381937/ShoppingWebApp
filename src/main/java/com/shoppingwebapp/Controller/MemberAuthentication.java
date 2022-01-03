@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-@CrossOrigin(allowCredentials = "true", origins = "http://54.65.248.67:3000/")//set CORS
+@CrossOrigin(allowCredentials = "true", origins = "http://54.65.248.67", allowedHeaders = "http://54.65.248.67")//set CORS
 @RestController // This means that this class is a Controller
 @RequestMapping(path = "/auth") // This means URL's start with /demo (after Application path)
 public class MemberAuthentication {

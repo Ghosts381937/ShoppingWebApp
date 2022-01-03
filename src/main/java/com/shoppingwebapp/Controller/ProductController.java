@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.data.domain.Pageable;
 
-@CrossOrigin
+@CrossOrigin (origins = "http://54.65.248.67", allowedHeaders = "http://54.65.248.67")
 @RestController
 @RequestMapping(path = "/product")
 public class ProductController {

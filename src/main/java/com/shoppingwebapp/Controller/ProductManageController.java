@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-@CrossOrigin(allowCredentials = "true", origins = "http://54.65.248.67:3000/")//set CORS
+@CrossOrigin(allowCredentials = "true", origins = "http://54.65.248.67", allowedHeaders = "http://54.65.248.67")//set CORS
 @RestController
 @RequestMapping(path = "/productManagement")
 public class ProductManageController {
@@ -70,7 +70,12 @@ public class ProductManageController {
     @PostMapping(path = "/add") //add
     public String add(@RequestParam String name, @RequestParam String description, @RequestParam String quantity, @RequestParam String price, @RequestParam("file") MultipartFile image, HttpSession session) {
         Object memberID = session.getAttribute("userId");
-        if(Integer.parseInt(quantity) < 0 || Integer.parseInt(price) < 0 || name.equals("") || description.equals("")){
+        try {
+            if(Integer.parseInt(quantity) < 0 || Integer.parseInt(price) < 0 || name.equals("") || description.equals("")){
+                return "Fail!";
+            }
+        }
+        catch (Exception e) {
             return "Fail!";
         }
         if(memberID != null){
